@@ -1,8 +1,8 @@
 #include <ESP8266WiFi.h>
 #include <PubSubClient.h>
 
-const char* SSID = "valhalla";
-const char* PSK = "66ae16e4-744f-49c9-92cd-66b2953d88b3";
+const char* SSID = "";
+const char* PSK = "";
 const char* MQTT_BROKER = "192.168.178.200";
 
 const int pinStatusGarageDoor = D4;
