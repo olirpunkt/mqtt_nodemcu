@@ -1,0 +1,132 @@
+[
+    {
+        "id": "bc09edd3.cf518",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "bbfed09e.a07c18",
+        "type": "mqtt in",
+        "z": "bc09edd3.cf518",
+        "name": "MyMQTT",
+        "topic": "/home/garage/door",
+        "qos": "2",
+        "broker": "984f1dfe.48bac",
+        "x": 208,
+        "y": 116,
+        "wires": [
+            [
+                "b0aa86fc.0545b",
+                "6c3a58de.7319c8"
+            ]
+        ]
+    },
+    {
+        "id": "b0aa86fc.0545b",
+        "type": "debug",
+        "z": "bc09edd3.cf518",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 415,
+        "y": 115,
+        "wires": []
+    },
+    {
+        "id": "8985f9a7.be4f",
+        "type": "ui_text",
+        "z": "bc09edd3.cf518",
+        "group": "4281d47.98d782c",
+        "order": 3,
+        "width": "3",
+        "height": "1",
+        "name": "",
+        "label": "<font color={{msg.color}} ><i class=\"fa fa-circle\" style=\"font-size:24px;\"></i></font>",
+        "format": "",
+        "layout": "row-left",
+        "x": 542,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "6c3a58de.7319c8",
+        "type": "function",
+        "z": "bc09edd3.cf518",
+        "name": "Status",
+        "func": "if (msg.payload.includes(\"open\")) {\n    msg.color = \"lime\";\n    msg.status =\"geschlossen\";\n    \n} else {\n    msg.color = \"red\";\n    msg.status = \"offen\";\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 378,
+        "y": 280,
+        "wires": [
+            [
+                "8985f9a7.be4f",
+                "d7163956.786c58"
+            ]
+        ]
+    },
+    {
+        "id": "d7163956.786c58",
+        "type": "ui_text",
+        "z": "bc09edd3.cf518",
+        "group": "4281d47.98d782c",
+        "order": 3,
+        "width": "3",
+        "height": "1",
+        "name": "",
+        "label": "{{msg.status}}",
+        "format": "",
+        "layout": "row-left",
+        "x": 542,
+        "y": 325,
+        "wires": []
+    },
+    {
+        "id": "984f1dfe.48bac",
+        "type": "mqtt-broker",
+        "z": "",
+        "name": "pihole",
+        "broker": "localhost",
+        "port": "8883",
+        "clientid": "",
+        "usetls": false,
+        "compatmode": true,
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": ""
+    },
+    {
+        "id": "4281d47.98d782c",
+        "type": "ui_group",
+        "z": "",
+        "name": "Garagentor",
+        "tab": "f42f8392.4cd7f",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "f42f8392.4cd7f",
+        "type": "ui_tab",
+        "z": "",
+        "name": "Garage",
+        "icon": "open_in_browser",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    }
+]
