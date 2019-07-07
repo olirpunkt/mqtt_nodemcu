@@ -4,6 +4,7 @@
 #include "config.h"
 
 /* 
+ *  2019/07/07
 all settings made in config.h 
 const char* SSID = "";
 const char* PSK = "";
