@@ -1,11 +1,16 @@
+
 #include <ESP8266WiFi.h>
 #include <PubSubClient.h>
+#include "config.h"
 
+/* 
+all settings made in config.h 
 const char* SSID = "";
 const char* PSK = "";
-const char* MQTT_BROKER = "192.168.178.200";
+const char* MQTT_BROKER = "";
+*/
 
-const int pinStatusGarageDoor = D4;
+const int pinStatusGarageDoor = 4;
 
 
 WiFiClient espClient;
@@ -22,7 +27,6 @@ void setup() {
   pinMode(pinStatusGarageDoor, INPUT);
   setup_wifi();
   client.setServer(MQTT_BROKER, 8883);
-
 }
 
 void setup_wifi() {
@@ -67,13 +71,13 @@ void loop() {
 
   if (digitalRead(pinStatusGarageDoor) == LOW) {
     Serial.println("Open");
-    snprintf(msg, 50, "{\"status\":\open\"}");
+    snprintf(msg, 50, "{\"status\":\"open\"}");
     Serial.println(msg);
     client.publish("/home/garage/door", msg);
   }
   else {
     Serial.println("Closed");
-    snprintf(msg, 50, "{\"status\":\closed\"}");
+    snprintf(msg, 50, "{\"status\":\"closed\"}");
     client.publish("/home/garage/door", msg);
     Serial.println(msg);
   }
