@@ -11,7 +11,7 @@ const char* PSK = "";
 const char* MQTT_BROKER = "";
 */
 
-const int pinStatusGarageDoor = 4;
+const int pinStatusGarageDoor = D4;
 
 
 WiFiClient espClient;
@@ -36,6 +36,7 @@ void setup_wifi() {
   Serial.print("Connecting to ");
   Serial.println(SSID);
 
+  WiFi.mode(WIFI_STA);
   WiFi.begin(SSID, PSK);
   while (WiFi.status() != WL_CONNECTED) {
     delay(500);
@@ -71,14 +72,14 @@ void loop() {
   //client.publish("/home/garage", msg);
 
   if (digitalRead(pinStatusGarageDoor) == LOW) {
-    Serial.println("Open");
-    snprintf(msg, 50, "{\"status\":\"open\"}");
+    Serial.println("Closed");
+    snprintf(msg, 50, "{\"status\":\"closed\"}");
     Serial.println(msg);
     client.publish("/home/garage/door", msg);
   }
   else {
-    Serial.println("Closed");
-    snprintf(msg, 50, "{\"status\":\"closed\"}");
+    Serial.println("open");
+    snprintf(msg, 50, "{\"status\":\"open\"}");
     client.publish("/home/garage/door", msg);
     Serial.println(msg);
   }
